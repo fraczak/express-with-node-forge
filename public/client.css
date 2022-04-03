@@ -1,0 +1,13 @@
+body {
+    text-align: center;
+}
+
+.result { 
+    text-align: left;
+    background-color: beige;
+    padding: 1em;
+    margin: 1em;
+    border: 2px solid;
+    overflow-wrap: break-word;
+    font-family: 'Courier New', Courier, monospace;
+}
