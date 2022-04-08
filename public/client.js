@@ -2,6 +2,21 @@
 
 var keyPair = forge.pki.rsa.generateKeyPair( { bits: 1024 } );
 
+var getKeyPair = () => {
+  // ... sauvegarder la clef privee en format PEM dans localStorage
+  var keyPair, pem = localStorage.getItem("pem");
+  if (pem) {
+    privateKey = forge.pki.privateKeyFromPem(pem);
+    publicKey = forge.pki.setRsaPublicKey(privateKey.n, privateKey.e);
+    keyPair = {privateKey, publicKey};
+  } else {
+    keyPair = forge.pki.rsa.generateKeyPair({bits: 1024});
+    localStorage.setItem("pem",forge.pki.privateKeyToPem(keyPair.privateKey));
+  };
+  return keyPair;
+};
+
+
 document.getElementById( "encrypt" ).addEventListener( "click", event => {
   var msg = document.getElementById( "msg" ).value;
   try {
