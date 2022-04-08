@@ -1,9 +1,10 @@
 // using 'forge.min.js' from npm 'node-forge' package
 
-var keyPair = forge.pki.rsa.generateKeyPair( { bits: 1024 } );
+// var keyPair = forge.pki.rsa.generateKeyPair( { bits: 1024 } );
 
 var getKeyPair = () => {
-  // ... sauvegarder la clef privee en format PEM dans localStorage
+  // generer et sauvegarder la clef privee en format PEM dans localStorage
+  // si elle n'y est pas encore...
   var keyPair, pem = localStorage.getItem("pem");
   if (pem) {
     privateKey = forge.pki.privateKeyFromPem(pem);
@@ -16,6 +17,7 @@ var getKeyPair = () => {
   return keyPair;
 };
 
+var keyPair = getKeyPair();
 
 document.getElementById( "encrypt" ).addEventListener( "click", event => {
   var msg = document.getElementById( "msg" ).value;
